@@ -6,6 +6,9 @@ import app.entity.Autor;
 
 public interface AutorRepository extends JpaRepository<Autor, Long>{
 
+	
+	
+	
 }
 
 
