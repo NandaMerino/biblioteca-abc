@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,7 +40,7 @@ public class AutorController {
 	@PutMapping("/update/{id}")
 	public ResponseEntity<String> update(@RequestBody Autor autor, @PathVariable long id) {
 		try {
-			String mensagem = this.autorService.update(autor);
+			String mensagem = this.autorService.update(id, autor);
 			return new ResponseEntity<String>(mensagem, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<String>("Ocorreu este erro ao tentar alterar o cadastro: " + e.getMessage(),
@@ -57,10 +58,10 @@ public class AutorController {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	//LISTAR AUTOR PELO ID
+
+	// LISTAR AUTOR PELO ID
 	@GetMapping("/findById/{id}")
-	public ResponseEntity<Autor>findById(@PathVariable long id){
+	public ResponseEntity<Autor> findById(@PathVariable long id) {
 		try {
 			Autor autor = this.autorService.findById(id);
 			return new ResponseEntity<>(autor, HttpStatus.OK);
@@ -68,15 +69,18 @@ public class AutorController {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	//DELETAR
-	@GetMapping("/delete/{id}")
-	public ResponseEntity<String>delete(@PathVariable long id){
+
+	// DELETAR
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<String> delete(@PathVariable long id) {
 		try {
 			String mensagem = this.autorService.delete(id);
 			return new ResponseEntity<>(mensagem, HttpStatus.OK);
+
 		} catch (Exception e) {
-			return new ResponseEntity<String>("Ocorreu este erro ao tentar deletar: "+e.getMessage(),HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("Ocorreu este erro ao tentar deletar: " + e.getMessage(),
+					HttpStatus.BAD_REQUEST);
+
 		}
 	}
 

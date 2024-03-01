@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,9 +37,9 @@ public class BibliotecaController {
 	
 	//ALTERAR
 	@PutMapping("/update/{id}")
-	public ResponseEntity<String>update(@RequestBody Biblioteca biblioteca, @PathVariable int id){
+	public ResponseEntity<String>update(@RequestBody Biblioteca biblioteca, @PathVariable long id){
 		try {
-			String mensagem = this.bibliotecaService.update(biblioteca);
+			String mensagem = this.bibliotecaService.update(id,biblioteca);
 			return new ResponseEntity<String>(mensagem, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<String>("Ocorreu este erro ao tentar alterar: "+e.getMessage(),HttpStatus.BAD_REQUEST);
@@ -68,7 +69,7 @@ public class BibliotecaController {
 	}
 	
 	//DELETAR CADASTRO
-	@GetMapping("/delete/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String>delete(@PathVariable long id){
 		try {
 			String mensagem = this.bibliotecaService.delete(id);
