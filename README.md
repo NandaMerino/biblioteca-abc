@@ -6,8 +6,7 @@
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [Instalação e Uso](#instalação-e-uso)
 - [Estrutura do Projeto](#estrutura-do-projeto)
-- [Contribuições](#contribuições)
-- [Licença](#licença)
+
 
 ## Descrição
 
